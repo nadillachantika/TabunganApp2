@@ -17,6 +17,7 @@ import androidx.navigation.Navigation
 import com.nadillla.tabunganapp.Helper.SessionManager
 import com.nadillla.tabunganapp.R
 import com.nadillla.tabunganapp.ViewModel.UserViewModel
+import kotlinx.android.synthetic.*
 import kotlinx.android.synthetic.main.fragment_register1.*
 
 class Register1Fragment : Fragment(), View.OnClickListener {
@@ -45,7 +46,7 @@ class Register1Fragment : Fragment(), View.OnClickListener {
         btnNext.setOnClickListener(this)
         btnBack.setOnClickListener(this)
 
-//        attachObserve()
+        attachObserve()
     }
 
     private fun attachObserve() {
@@ -64,6 +65,7 @@ class Register1Fragment : Fragment(), View.OnClickListener {
 //        navController.popBackStack(R.id.register2Fragment, true)
 
         navController.navigate(R.id.action_register1Fragment_to_register2Fragment, bundle)
+        clearFindViewByIdCache()
 
 
     }
@@ -83,11 +85,10 @@ class Register1Fragment : Fragment(), View.OnClickListener {
                     edName.error = "Nama tidak boleh kosong"
                 } else if (edEmail.text.toString().isEmpty()) {
                     edEmail.error = "Email tidak boleh kosong"
-
                 } else {
                     validasiEmail()
                     if (validasiEmail() == true) {
-//                        userViewModel.gotEmail(edEmail.text.toString())
+                        userViewModel.gotEmail(edEmail.text.toString())
                         val bundle = bundleOf(
                             "name" to edName.text.toString(),
                             "email" to edEmail.text.toString()

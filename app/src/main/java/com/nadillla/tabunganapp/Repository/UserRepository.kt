@@ -20,25 +20,17 @@ class UserRepository(val context: Context) {
 
     fun registerUser(id:Int?,name:String,email:String,password:String,passwordKonf:String,responseHandler:(User)->Unit,errorHandler:(Throwable)->Unit) {
 
-        if(password.isEmpty()){
-            Toast.makeText(context,"Password tidak boleh kosong",Toast.LENGTH_SHORT).show()
-        }
-        else if (password != passwordKonf) {
-            Toast.makeText(context, "Password Tidak Sama", Toast.LENGTH_SHORT).show()
-        } else if(password.length<6) {
-            Toast.makeText(context, "Password harus lebih dari 5 karakter",Toast.LENGTH_SHORT).show()
-        }else{
+
             Observable.fromCallable { tabunganDb.userDao().register(User(id,name,email, password))}
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({ item ->
                     responseHandler(User(id,name,email,password))
-                    session.logout()
 
                 }, {
                     errorHandler(it)
                 })
-        }
+
     }
 
 

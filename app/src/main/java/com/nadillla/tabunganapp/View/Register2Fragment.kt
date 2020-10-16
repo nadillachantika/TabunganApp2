@@ -72,44 +72,36 @@ class Register2Fragment : Fragment(), View.OnClickListener {
     }
 
     private fun attachObserve() {
-        //register
-//        userViewModel._responseActionUser.observe(viewLifecycleOwner, Observer { registUser() })
-//        userViewModel._isErrorUser.observe(viewLifecycleOwner, Observer { errorRegister(it) })
-
-        //cek email
-        userViewModel._responseActionUser.observe(viewLifecycleOwner, Observer { cekEmail() })
-        userViewModel._isErrorUser.observe(viewLifecycleOwner, Observer { errorEmail() })
+        userViewModel._responseActionUser.observe(viewLifecycleOwner, Observer { successRegister() })
+        userViewModel._isErrorUser.observe(viewLifecycleOwner, Observer { errorRegister(it) })
 
     }
 
-    private fun errorEmail() {
-
-
-        userViewModel.registerUser(
-            null,
-            get_name.toString(),
-            get_email.toString(),
-            edPassword.text.toString(),
-            edConfirmPass.text.toString()
-        )
+    private fun successRegister() {
 
         val bundle = bundleOf(
             "password" to edPassword.text.toString(),
             "email" to tvEmail.text.toString()
         )
-
         navController.navigate(R.id.action_register2Fragment_to_resultFragment, bundle)
         clearFindViewByIdCache()
     }
 
-    private fun cekEmail() {
-        Toast.makeText(context, "Register gagal, Email sudah terdaftar", Toast.LENGTH_SHORT).show()
+    private fun errorRegister(it :Throwable) {
+        Toast.makeText(context, "Register gagal", Toast.LENGTH_SHORT).show()
+        Log.d("TAG", "errorRegister: ${it.message}")
     }
 
 
     override fun onClick(v: View?) {
         when (v?.id) {
-            R.id.btnFinish -> userViewModel.gotEmail(get_email.toString())
+            R.id.btnFinish ->  userViewModel.registerUser(
+                null,
+                get_name.toString(),
+                get_email.toString(),
+                edPassword.text.toString(),
+                edConfirmPass.text.toString()
+            )
             R.id.back -> navController.navigate(R.id.register1Fragment)
 
 

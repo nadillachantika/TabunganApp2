@@ -46,11 +46,6 @@ class MainFragment  : Fragment(), View.OnClickListener {
         navController = Navigation.findNavController(view)
         btnRegistermain.setOnClickListener(this)
         btnLogin.setOnClickListener(this)
-//        navController.popBackStack(R.id.mainFragment, true)
-
-
-
-
         attachObserve()
     }
 
@@ -59,15 +54,12 @@ class MainFragment  : Fragment(), View.OnClickListener {
         super.onCreate(savedInstanceState)
 
         userViewModel = ViewModelProvider(this).get(UserViewModel::class.java)
-
-
         get_email = arguments?.getString("email")
         get_password = arguments?.getString("password")
         get_name = arguments?.getString("name")
 
 
     }
-
 
     private fun attachObserve() {
         userViewModel._responseActionUser.observe(viewLifecycleOwner, Observer { loginSuccess(it) })
@@ -106,10 +98,6 @@ class MainFragment  : Fragment(), View.OnClickListener {
 
         }
     }
-
-
-
-
 
 
 }

@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/item_tabungan"
-    android:layout_width="match_parent"
+    android:layout_width="wrap_content"
     android:layout_height="wrap_content">
 
     <TextView
@@ -36,7 +36,7 @@
 
     <TextView
         android:id="@+id/tvKeterangan"
-        android:layout_width="231dp"
+        android:layout_width="wrap_content"
         android:layout_height="84dp"
         android:gravity="center_vertical"
         android:paddingStart="10dp"
@@ -51,6 +51,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="4dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.782"
         app:layout_constraintStart_toEndOf="@+id/tvJml"
         app:layout_constraintTop_toBottomOf="@+id/btnEdit"
         app:srcCompat="@drawable/ic_baseline_delete_24"
@@ -61,7 +62,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="4dp"
+        android:layout_marginTop="4dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.768"
         app:layout_constraintStart_toEndOf="@+id/tvJml"
         app:layout_constraintTop_toBottomOf="@+id/tvTgl"
         app:srcCompat="@drawable/ic_baseline_edit_24"
