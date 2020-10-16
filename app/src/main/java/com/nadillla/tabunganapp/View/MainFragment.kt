@@ -67,7 +67,7 @@ class MainFragment  : Fragment(), View.OnClickListener {
     }
 
     private fun errorLogin(it:Throwable) {
-        Toast.makeText(context,"Email belum terdaftar",Toast.LENGTH_SHORT).show()
+        Toast.makeText(context,"Login failed",Toast.LENGTH_SHORT).show()
         Log.d("TAG", "errorLogin: ${it.message}")
     }
 
