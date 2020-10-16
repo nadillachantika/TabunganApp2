@@ -52,6 +52,7 @@ class Home2Activity : AppCompatActivity() {
                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
                    startActivity(intent)
+                   finish()
                }
                setNegativeButton("Batal") { dialogInterface, i ->
                    dialogInterface.dismiss()
