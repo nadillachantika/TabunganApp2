@@ -1,6 +1,8 @@
 package com.nadillla.tabunganapp.ViewModel
 
 import android.app.Application
+import android.content.Context
+import android.widget.Toast
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -10,6 +12,7 @@ import com.nadillla.tabunganapp.Repository.TabunganRepository
 
 class TabunganViewModel (application :Application): AndroidViewModel(application){
 
+    val context : Context = application
     val repository= TabunganRepository(application.applicationContext)
     var responseData = MutableLiveData<List<Tabungan>>()
     var _responseData : LiveData<List<Tabungan>> =responseData
@@ -33,6 +36,8 @@ class TabunganViewModel (application :Application): AndroidViewModel(application
     fun addTabungan(id:Int?,tgl:String, jumlah:Int, keterangan:String){
             repository.addTabungan(id,tgl,jumlah,keterangan,{
                 responseAction.value=it
+                Toast.makeText(context,"Data berhasil ditambahkan",Toast.LENGTH_SHORT).show()
+
 
             },{
                 isError.value=it
@@ -42,6 +47,7 @@ class TabunganViewModel (application :Application): AndroidViewModel(application
     fun updateTabungan(id: Int?,tgl: String,jumlah: Int,keterangan: String){
         repository.updateTabungan(id,tgl,jumlah,keterangan,{
             responseAction.value=it
+            Toast.makeText(context,"Data berhasil diubah", Toast.LENGTH_SHORT).show()
         },{
             isError.value=it
         })
@@ -50,6 +56,7 @@ class TabunganViewModel (application :Application): AndroidViewModel(application
     fun deleteTabungan(item:Tabungan){
         repository.deleteTabungan(item,{
             responseAction.value=it
+            Toast.makeText(context,"Data berhasil dihapus",Toast.LENGTH_SHORT).show()
         },{
             isError.value=it
         })

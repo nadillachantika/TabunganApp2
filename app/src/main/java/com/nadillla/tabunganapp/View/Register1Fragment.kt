@@ -115,22 +115,7 @@ class Register1Fragment : Fragment(), View.OnClickListener {
             return false
         }
     }
-//    fun clearStack()
-//    {
-//        val backStackEntry = supportFragmentManager.backStackEntryCount
-//        if (backStackEntry > 0) {
-//            for (i in 0 until backStackEntry) {
-//                supportFragmentManager.popBackStackImmediate()
-//            }
-//        }
-//        if (supportFragmentManager.fragments.size > 0) {
-//            supportFragmentManager.fragments.forEach {
-//                if (it != null) {
-//                    supportFragmentManager.beginTransaction().remove(it).commit()
-//                }
-//            }
-//        }
-//    }
+
 
 
 }

@@ -42,7 +42,6 @@ class TabunganRepository(val context:Context) {
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
                 responseHandler(Tabungan(id,tgl,jum,ket))
-                Toast.makeText(context,"Data berhasil ditambahkan",Toast.LENGTH_SHORT).show()
 
 
             },{
@@ -59,8 +58,6 @@ class TabunganRepository(val context:Context) {
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
                 responseHandler(Tabungan(id,tgl,jum,ket))
-                Toast.makeText(context,"Data berhasil diubah",Toast.LENGTH_SHORT).show()
-
             },{
                 errorHandler(it)
             })
@@ -74,7 +71,7 @@ class TabunganRepository(val context:Context) {
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
                 responseHandler(item)
-                Toast.makeText(context,"Data berhasil dihapus",Toast.LENGTH_SHORT).show()
+
 
             }, {
                 errorHandler(it)

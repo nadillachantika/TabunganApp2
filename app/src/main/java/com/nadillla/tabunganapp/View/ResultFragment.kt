@@ -54,6 +54,7 @@ class ResultFragment : Fragment(), View.OnClickListener {
         when(v?.id){
             R.id.btnBackToLogin->{
                 navController.navigate(R.id.mainFragment)
+
             }
                 R.id.back->activity?.onBackPressed()
 

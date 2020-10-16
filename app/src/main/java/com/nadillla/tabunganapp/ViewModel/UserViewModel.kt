@@ -24,8 +24,8 @@ class UserViewModel(application: Application):AndroidViewModel(application) {
     var isErrorUser = MutableLiveData<Throwable>()
     var _isErrorUser : LiveData<Throwable> = isErrorUser
 
-    private val messsage = MutableLiveData<String>()
-    val _message : LiveData<String> = messsage
+//    private val messsage = MutableLiveData<String>()
+//    val _message : LiveData<String> = messsage
 
 
     fun gotEmail(email: String){
