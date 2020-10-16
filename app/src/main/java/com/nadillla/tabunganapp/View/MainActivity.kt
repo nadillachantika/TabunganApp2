@@ -19,7 +19,10 @@ class MainActivity : AppCompatActivity() {
 
     override fun onBackPressed() {
         super.onBackPressed()
-        finish()
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+        startActivity(intent)
     }
 
 
