@@ -24,11 +24,11 @@ class TabunganViewModel(application: Application) : AndroidViewModel(application
     var isError = MutableLiveData<Throwable>()
     var _isError: LiveData<Throwable> = isError
 
-    var _empty_ket = MutableLiveData<Boolean>()
-    var empty_ket: LiveData<Boolean> = _empty_ket
+    var empty_ket = MutableLiveData<Boolean>()
+    var _empty_ket: LiveData<Boolean> = empty_ket
 
-    var _empty_jml = MutableLiveData<Boolean>()
-    var empty_jml: LiveData<Boolean> = _empty_jml
+    var empty_jml = MutableLiveData<Boolean>()
+    var _empty_jml: LiveData<Boolean> = empty_jml
 
 
     fun getListTabungan() {
@@ -42,11 +42,12 @@ class TabunganViewModel(application: Application) : AndroidViewModel(application
     }
 
     fun addTabungan(id: Int?, tgl: String, jumlah: Int, keterangan: String) {
-        if (jumlah.toString().isEmpty()) {
-            _empty_jml.value = true
-        } else if (keterangan.isEmpty()) {
-            _empty_ket.value = true
-        } else {
+
+//        if (jumlah.equals(null)) {
+//            empty_jml.value = true
+//        } else if (keterangan.isEmpty()) {
+//            empty_ket.value = true
+//        } else {
             repository.addTabungan(id, tgl, jumlah, keterangan, {
                 responseAction.value = it
                 Toast.makeText(context, "Data berhasil ditambahkan", Toast.LENGTH_SHORT).show()
@@ -54,22 +55,23 @@ class TabunganViewModel(application: Application) : AndroidViewModel(application
             }, {
                 isError.value = it
             })
-        }
+//        }
+
     }
 
     fun updateTabungan(id: Int?, tgl: String, jumlah: Int, keterangan: String) {
-        if (jumlah.toString().isEmpty()) {
-            _empty_jml.value = true
-        } else if (keterangan.isEmpty()) {
-            _empty_ket.value = true
-        } else {
+//        if (jumlah.equals(null)) {
+//            empty_jml.value = true
+//        } else if (keterangan.isEmpty()) {
+//            empty_ket.value = true
+//        } else {
             repository.updateTabungan(id, tgl, jumlah, keterangan, {
                 responseAction.value = it
                 Toast.makeText(context, "Data berhasil diubah", Toast.LENGTH_SHORT).show()
             }, {
                 isError.value = it
             })
-        }
+//        }
     }
 
     fun deleteTabungan(item: Tabungan) {
