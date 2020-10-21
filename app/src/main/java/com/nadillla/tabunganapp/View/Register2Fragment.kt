@@ -74,7 +74,22 @@ class Register2Fragment : Fragment(), View.OnClickListener {
     private fun attachObserve() {
         userViewModel._responseActionUser.observe(viewLifecycleOwner, Observer { successRegister() })
         userViewModel._isErrorUser.observe(viewLifecycleOwner, Observer { errorRegister(it) })
+        userViewModel.password_empty.observe(viewLifecycleOwner, Observer { emptyPassword() })
+        userViewModel.password_less.observe(viewLifecycleOwner, Observer { lessPassword() })
+        userViewModel.passwordnotmatch.observe(viewLifecycleOwner, Observer { passNotMatch() })
 
+    }
+
+    private fun passNotMatch() {
+        edConfirmPass.error="Password tidak cocok"
+    }
+
+    private fun lessPassword() {
+        edPassword.error="Password kurang dari 5 karakter"
+    }
+
+    private fun emptyPassword() {
+        edPassword.error="Password tidak boleh kosong"
     }
 
     private fun successRegister() {

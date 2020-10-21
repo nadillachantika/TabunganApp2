@@ -52,67 +52,51 @@ class Register1Fragment : Fragment(), View.OnClickListener {
     private fun attachObserve() {
         userViewModel._responseActionUser.observe(viewLifecycleOwner, Observer { gotUser() })
         userViewModel._isErrorUser.observe(viewLifecycleOwner, Observer { emptyUser(it) })
+        userViewModel.wrong_email.observe(viewLifecycleOwner, Observer { wrongEmail() })
+        userViewModel.empty_email.observe(viewLifecycleOwner, Observer { emptyEmail() })
+        userViewModel.empty_name.observe(viewLifecycleOwner, Observer { emptyName() })
 
+    }
+
+    private fun emptyName() {
+        edName.error="Nama tidak boleh kosong"
+    }
+
+    private fun emptyEmail() {
+        edEmail.error="Email tidak boleh kosong"
+    }
+
+
+    private fun wrongEmail() {
+        edEmail.error="Email tidak valid"
     }
 
     private fun emptyUser(it: Throwable?) {
         Log.d("TAG", "Lanjut register, email belum ada")
-
         val bundle = bundleOf(
             "name" to edName.text.toString(),
             "email" to edEmail.text.toString()
         )
-//        navController.popBackStack(R.id.register2Fragment, true)
-
-        navController.navigate(R.id.action_register1Fragment_to_register2Fragment, bundle)
+        navController.navigate(
+            R.id.action_register1Fragment_to_register2Fragment,
+            bundle
+        )
         clearFindViewByIdCache()
-
-
     }
 
     private fun gotUser() {
-
         Log.d("TAG", "email sudah ada")
         Toast.makeText(context, "Email sudah terdaftar", Toast.LENGTH_SHORT).show()
 
-
     }
+
 
     override fun onClick(v: View?) {
         when (v?.id) {
-            R.id.btnNext ->
-                if (edName.text.toString().isEmpty()) {
-                    edName.error = "Nama tidak boleh kosong"
-                } else if (edEmail.text.toString().isEmpty()) {
-                    edEmail.error = "Email tidak boleh kosong"
-                } else {
-                    validasiEmail()
-                    if (validasiEmail() == true) {
-                        userViewModel.gotEmail(edEmail.text.toString())
-                        val bundle = bundleOf(
-                            "name" to edName.text.toString(),
-                            "email" to edEmail.text.toString()
-                        )
-                        navController.navigate(
-                            R.id.action_register1Fragment_to_register2Fragment,
-                            bundle
-                        )
-
+            R.id.btnNext ->{
+                        userViewModel.gotEmail(edEmail.text.toString(),edName.text.toString())
                     }
-
-                }
-
             R.id.btnBack -> activity?.onBackPressed()
-        }
-    }
-
-    private fun validasiEmail(): Boolean {
-        var Email: String = edEmail.text.toString()
-        if (Patterns.EMAIL_ADDRESS.matcher(Email).matches()) {
-            return true
-        } else {
-            edEmail.error = "Masukkan alamat email"
-            return false
         }
     }
 

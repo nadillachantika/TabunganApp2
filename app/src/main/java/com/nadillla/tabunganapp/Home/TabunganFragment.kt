@@ -18,7 +18,9 @@ import com.nadillla.tabunganapp.Local.TabunganDb
 import com.nadillla.tabunganapp.R
 import com.nadillla.tabunganapp.ViewModel.TabunganViewModel
 import kotlinx.android.synthetic.main.activity_home2.*
+import kotlinx.android.synthetic.main.dialog_add_tabungan.*
 import kotlinx.android.synthetic.main.dialog_add_tabungan.view.*
+import kotlinx.android.synthetic.main.dialog_add_tabungan.view.editJumlah
 import kotlinx.android.synthetic.main.fragment_tabungan.*
 import kotlinx.android.synthetic.main.item_tabungan.view.*
 import java.text.SimpleDateFormat
@@ -74,19 +76,28 @@ class TabunganFragment : Fragment() {
         tbngnViewModel._isError.observe(
             viewLifecycleOwner,
             androidx.lifecycle.Observer { inputError(it) })
+        tbngnViewModel.empty_jml.observe(viewLifecycleOwner, androidx.lifecycle.Observer { emptyJml() })
 
+        tbngnViewModel.empty_ket.observe(viewLifecycleOwner, androidx.lifecycle.Observer { emptyKet() })
+
+    }
+
+    private fun emptyKet() {
+        editTextKeterangan.error="Keterangan tidak boleh kosong"
+    }
+
+    private fun emptyJml() {
+        editJumlah.error="Masukkan jumlah"
     }
 
 
     private fun inputError(it: Throwable?) {
-       // Toast.makeText(context, "Data gagal ditambahkan", Toast.LENGTH_SHORT).show()
         Log.d("TAG", "inputTabungan: gagal")
 
 
     }
 
     private fun inputTabungan(it: Tabungan) {
-    //    Toast.makeText(context, "Data berhasil ditambahkan", Toast.LENGTH_SHORT).show()
         Log.d("TAG", "inputTabungan: OK")
         dialogView?.dismiss()
         tbngnViewModel.getListTabungan()
@@ -130,16 +141,11 @@ class TabunganFragment : Fragment() {
 
         view.editTgl.setText(getDate())
         view.btnSimpan.setOnClickListener {
-            if (view.editTextKeterangan.text.isNotEmpty() && view.editJumlah.text.isNotEmpty()) {
                 tbngnViewModel.addTabungan(
                     null, getDate(),
                     view.editJumlah.text.toString().toInt(),
                     view.editTextKeterangan.text.toString()
                 )
-//                dialogView?.dismiss()
-            } else {
-                Toast.makeText(context, "Tidak boleh ada yang kosong", Toast.LENGTH_SHORT).show()
-            }
 
         }
         view.btnClose.setOnClickListener {
@@ -162,18 +168,12 @@ class TabunganFragment : Fragment() {
         view.editJumlah.setText(item?.jumlah.toString())
 
         view.btnSimpan.setOnClickListener {
-            if (view.editTextKeterangan.text.isNotEmpty() && view.editJumlah.text.isNotEmpty() && view.editJumlah.text.isNotEmpty()) {
                 tbngnViewModel.updateTabungan(
                     item?.id,
                     getDate(),
                     view.editJumlah.text.toString().toInt(),
                     view.editTextKeterangan.text.toString()
                 )
-
-            } else {
-                Toast.makeText(context, "Tidak boleh ada yang kosong", Toast.LENGTH_SHORT).show()
-
-            }
         }
         view.btnClose.setOnClickListener {
             dialogView?.dismiss()
