@@ -44,10 +44,10 @@ class UserViewModel(application: Application) : AndroidViewModel(application) {
 
 
     fun gotEmail(email: String, name: String) {
-        if (email.isEmpty()) {
-            _empty_email.value = true
-        } else if (name.isEmpty()) {
+        if  (name.isEmpty()) {
             _empty_name.value = true
+        } else if (email.isEmpty()) {
+            _empty_email.value = true
         } else if (validasiEmail(email) == false) {
             _wrong_email.value = true
         } else {
