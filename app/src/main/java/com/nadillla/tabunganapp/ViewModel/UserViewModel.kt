@@ -9,6 +9,7 @@ import androidx.lifecycle.*
 import com.nadillla.tabunganapp.Helper.SessionManager
 import com.nadillla.tabunganapp.Local.User
 import com.nadillla.tabunganapp.Repository.UserRepository
+import kotlinx.android.synthetic.main.fragment_main.*
 import kotlinx.android.synthetic.main.fragment_register1.*
 
 class UserViewModel(application: Application) : AndroidViewModel(application) {
@@ -62,15 +63,20 @@ class UserViewModel(application: Application) : AndroidViewModel(application) {
 
 
     fun loginUser(email: String, password: String) {
+        if(email.isEmpty()){
+           _empty_email.value=true
+        }else if(password.isEmpty()){
+            _password_empty.value=true
+        }else {
+            repoUser.loginUser(email, password, {
+                responseActionUser.value = it
 
-        repoUser.loginUser(email, password, {
-            responseActionUser.value = it
-
-        }, {
-            isErrorUser.value = it
+            }, {
+                isErrorUser.value = it
 
 
-        })
+            })
+        }
     }
 
     fun registerUser(

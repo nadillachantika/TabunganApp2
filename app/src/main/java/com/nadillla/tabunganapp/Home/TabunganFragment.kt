@@ -83,13 +83,15 @@ class TabunganFragment : Fragment() {
     }
 
     private fun emptyKet() {
+        val dialog = AlertDialog.Builder(context)
         val view = layoutInflater.inflate(R.layout.dialog_add_tabungan, null)
-        view?.editTextKeterangan?.error="Keterangan tidak boleh kosong"
+        dialog.setView(view)
     }
 
     private fun emptyJml() {
+        val dialog = AlertDialog.Builder(context)
         val view = layoutInflater.inflate(R.layout.dialog_add_tabungan, null)
-        view?.editJumlah?.error="Masukkan jumlah"
+        dialog.setView(view)
     }
 
 

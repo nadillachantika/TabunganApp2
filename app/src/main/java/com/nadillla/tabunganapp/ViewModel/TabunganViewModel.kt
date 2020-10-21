@@ -24,11 +24,11 @@ class TabunganViewModel(application: Application) : AndroidViewModel(application
     var isError = MutableLiveData<Throwable>()
     var _isError: LiveData<Throwable> = isError
 
-    var empty_ket = MutableLiveData<Boolean>()
-    var _empty_ket: LiveData<Boolean> = empty_ket
+    var _empty_ket = MutableLiveData<Boolean>()
+    var empty_ket: LiveData<Boolean> = _empty_ket
 
-    var empty_jml = MutableLiveData<Boolean>()
-    var _empty_jml: LiveData<Boolean> = empty_jml
+    var _empty_jml = MutableLiveData<Boolean>()
+    var empty_jml: LiveData<Boolean> = _empty_jml
 
 
     fun getListTabungan() {
@@ -44,9 +44,9 @@ class TabunganViewModel(application: Application) : AndroidViewModel(application
     fun addTabungan(id: Int?, tgl: String, jumlah: Int, keterangan: String) {
 
 //        if (jumlah.equals(null)) {
-//            empty_jml.value = true
+//            _empty_jml.value = true
 //        } else if (keterangan.isEmpty()) {
-//            empty_ket.value = true
+//            _empty_ket.value = true
 //        } else {
             repository.addTabungan(id, tgl, jumlah, keterangan, {
                 responseAction.value = it

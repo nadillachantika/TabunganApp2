@@ -19,6 +19,8 @@ import com.nadillla.tabunganapp.Local.User
 import com.nadillla.tabunganapp.R
 import com.nadillla.tabunganapp.ViewModel.UserViewModel
 import kotlinx.android.synthetic.main.fragment_main.*
+import kotlinx.android.synthetic.main.fragment_main.edEmail
+import kotlinx.android.synthetic.main.fragment_register1.*
 
 class MainFragment  : Fragment(), View.OnClickListener {
 
@@ -64,6 +66,16 @@ class MainFragment  : Fragment(), View.OnClickListener {
     private fun attachObserve() {
         userViewModel._responseActionUser.observe(viewLifecycleOwner, Observer { loginSuccess(it) })
         userViewModel._isErrorUser.observe(viewLifecycleOwner, Observer { errorLogin(it) })
+        userViewModel.empty_email.observe(viewLifecycleOwner, Observer { emptyEmail() })
+        userViewModel.password_empty.observe(viewLifecycleOwner, Observer { emptyPassword() })
+
+    }
+    private fun emptyEmail() {
+        edEmail.error="Email tidak boleh kosong"
+    }
+
+    private fun emptyPassword() {
+        edPassword.error="Password tidak boleh kosong"
     }
 
     private fun errorLogin(it:Throwable) {
@@ -86,18 +98,12 @@ class MainFragment  : Fragment(), View.OnClickListener {
             R.id.btnRegistermain->navController.navigate(R.id.action_mainFragment_to_register1Fragment)
 
             R.id.btnLogin->
-
-                if(edEmail.text.toString().isEmpty()){
-                    edEmail.error = "Email tidak boleh kosong"
-                }else if(edPassword.text.toString().isEmpty()){
-                    edPassword.error="Password tidak boleh kosong"
-                }else{
                     userViewModel.loginUser(edEmail.text.toString(),edPassword.text.toString())
                 }
 
 
         }
-    }
+
 
 
 }
