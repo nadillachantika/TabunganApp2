@@ -13,8 +13,6 @@ import kotlinx.android.synthetic.main.fragment_register1.*
 
 class UserViewModel(application: Application) : AndroidViewModel(application) {
 
-    val context: Context = application
-
 
     val repoUser = UserRepository(application.applicationContext)
     var responseDataUser = MutableLiveData<List<User>>()
