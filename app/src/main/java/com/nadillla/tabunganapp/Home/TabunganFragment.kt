@@ -76,22 +76,54 @@ class TabunganFragment : Fragment() {
         tbngnViewModel._isError.observe(
             viewLifecycleOwner,
             androidx.lifecycle.Observer { inputError(it) })
-        tbngnViewModel._empty_jml.observe(viewLifecycleOwner, androidx.lifecycle.Observer { emptyJml() })
+        tbngnViewModel.empty_jml.observe(
+            viewLifecycleOwner,
+            androidx.lifecycle.Observer { emptyJml() })
 
-        tbngnViewModel._empty_ket.observe(viewLifecycleOwner, androidx.lifecycle.Observer { emptyKet() })
+        tbngnViewModel.empty_ket.observe(
+            viewLifecycleOwner,
+            androidx.lifecycle.Observer { emptyKet() })
 
     }
 
     private fun emptyKet() {
+        dialogView?.dismiss()
         val dialog = AlertDialog.Builder(context)
         val view = layoutInflater.inflate(R.layout.dialog_add_tabungan, null)
         dialog.setView(view)
+        view.editTextKeterangan.error = "Masukkan Keterangan"
+        view.btnSimpan.setOnClickListener {
+            tbngnViewModel.addTabungan(
+                null, getDate(),
+                view.editJumlah.text.toString(),
+                view.editTextKeterangan.text.toString()
+            )
+        }
+        view.btnClose.setOnClickListener {
+            dialogView?.dismiss()
+        }
+        dialogView = dialog.create()
+        dialogView?.show()
     }
 
     private fun emptyJml() {
+        dialogView?.dismiss()
         val dialog = AlertDialog.Builder(context)
         val view = layoutInflater.inflate(R.layout.dialog_add_tabungan, null)
         dialog.setView(view)
+        view.editJumlah.error = "Masukkan jumlah"
+        view.btnSimpan.setOnClickListener {
+            tbngnViewModel.addTabungan(
+                null, getDate(),
+                view.editJumlah.text.toString(),
+                view.editTextKeterangan.text.toString()
+            )
+        }
+        view.btnClose.setOnClickListener {
+            dialogView?.dismiss()
+        }
+        dialogView = dialog.create()
+        dialogView?.show()
     }
 
 
@@ -145,19 +177,15 @@ class TabunganFragment : Fragment() {
 
         view.editTgl.setText(getDate())
         view.btnSimpan.setOnClickListener {
-            if (view.editJumlah.text.toString().isEmpty()) {
-                view.editJumlah.error = "tidak boleh kosong"
-            } else if (view.editTextKeterangan.text.isEmpty()) {
-                view.editTextKeterangan.error = "tidak boleh kosong"
-            } else {
-                tbngnViewModel.addTabungan(
-                    null, getDate(),
-                    view.editJumlah.text.toString().toInt(),
-                    view.editTextKeterangan.text.toString()
-                )
 
-            }
+            tbngnViewModel.addTabungan(
+                null, getDate(),
+                view.editJumlah.text.toString(),
+                view.editTextKeterangan.text.toString()
+            )
+
         }
+
         view.btnClose.setOnClickListener {
             dialogView?.dismiss()
         }
@@ -178,18 +206,12 @@ class TabunganFragment : Fragment() {
         view.editJumlah.setText(item?.jumlah.toString())
 
         view.btnSimpan.setOnClickListener {
-            if (view.editTextKeterangan.text.isEmpty()) {
-                view.editTextKeterangan.error = "tidak boleh kosong"
-            } else if (view.editJumlah.text.isEmpty()) {
-                view.editJumlah.error = "tidak boleh kosong"
-            } else {
-                tbngnViewModel.updateTabungan(
-                    item?.id,
-                    getDate(),
-                    view.editJumlah.text.toString().toInt(),
-                    view.editTextKeterangan.text.toString()
-                )
-            }
+            tbngnViewModel.updateTabungan(
+                item?.id,
+                getDate(),
+                view.editJumlah.text.toString(),
+                view.editTextKeterangan.text.toString()
+            )
         }
         view.btnClose.setOnClickListener {
             dialogView?.dismiss()
