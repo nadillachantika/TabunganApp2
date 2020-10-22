@@ -87,43 +87,13 @@ class TabunganFragment : Fragment() {
     }
 
     private fun emptyKet() {
-        dialogView?.dismiss()
-        val dialog = AlertDialog.Builder(context)
-        val view = layoutInflater.inflate(R.layout.dialog_add_tabungan, null)
-        dialog.setView(view)
-        view.editTextKeterangan.error = "Masukkan Keterangan"
-        view.btnSimpan.setOnClickListener {
-            tbngnViewModel.addTabungan(
-                null, getDate(),
-                view.editJumlah.text.toString(),
-                view.editTextKeterangan.text.toString()
-            )
-        }
-        view.btnClose.setOnClickListener {
-            dialogView?.dismiss()
-        }
-        dialogView = dialog.create()
-        dialogView?.show()
+        dialogView?.editTextKeterangan?.error="Masukkan keterangan"
+
     }
 
     private fun emptyJml() {
-        dialogView?.dismiss()
-        val dialog = AlertDialog.Builder(context)
-        val view = layoutInflater.inflate(R.layout.dialog_add_tabungan, null)
-        dialog.setView(view)
-        view.editJumlah.error = "Masukkan jumlah"
-        view.btnSimpan.setOnClickListener {
-            tbngnViewModel.addTabungan(
-                null, getDate(),
-                view.editJumlah.text.toString(),
-                view.editTextKeterangan.text.toString()
-            )
-        }
-        view.btnClose.setOnClickListener {
-            dialogView?.dismiss()
-        }
-        dialogView = dialog.create()
-        dialogView?.show()
+        dialogView?.editJumlah?.error="Masukkan jumlah"
+
     }
 
 
