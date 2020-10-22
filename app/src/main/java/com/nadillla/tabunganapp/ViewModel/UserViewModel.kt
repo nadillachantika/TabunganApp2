@@ -111,15 +111,6 @@ class UserViewModel(application: Application) : AndroidViewModel(application) {
     }
 
 
-//    private fun validasiEmail(): Boolean {
-//        var Email: String = edEmail.text.toString()
-//        if (Patterns.EMAIL_ADDRESS.matcher(Email).matches()) {
-//            return true
-//        } else {
-//            edEmail.error = "Masukkan alamat email"
-//            return false
-//        }
-//    }
 
 
 }
